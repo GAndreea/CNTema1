@@ -1,3 +1,10 @@
+import numpy as np
+from flask import Flask
+from flask import request
+from flask import render_template
+import random
+app = Flask(__name__)
+
 import functools
 
 epsilon = pow(10,-6);
@@ -64,7 +71,6 @@ def suma(m1, m2):
                 l+=1;
             else:
                 if (int(m1[i][k][1]) < int(m2[i][l][1])):
-                    #matrix[i].append(m1[i][k]);
                     new_line = list(matrix[i])
                     new_line.append(m1[i][k])
                     matrix[i] = list(new_line);
@@ -73,9 +79,7 @@ def suma(m1, m2):
                     new_line = list(matrix[i])
                     new_line.append(m2[i][l])
                     matrix[i] = list(new_line);
-                    #matrix[i].append(m2[i][l])
                     l += 1;
-        #print(k,l)
         while (k<len(m1[i])):
             new_line = list(matrix[i])
             new_line.append(m1[i][k])
@@ -149,7 +153,7 @@ def creeaza_x(n):
         matrix[i] = list(new_line);
     return matrix
 
-def main():
+def functie():
     m1 = sparse_matrix("a.txt");
     m2 = sparse_matrix("b.txt");
     m3 = sparse_matrix("aplusb.txt")
@@ -171,9 +175,25 @@ def main():
     b2=get_b("b.txt")
     i0=multiply(m2,transpune(x));
     print("COMPARA B (B): " + str(compara(i0, b2)))
-    #print(get_b("a.txt"))
+    k1=str(compara(s,m3))
+    k2=str(compara(i, m4))
+    k3=str(compara(m,b))
+    k4=str(compara(i0, b2))
+    return (k1,k2,k3,k4)
 
 
+@app.route('/')
+def my_form():
+   f = functie()
+   return render_template("Tema1.html", k1=f[0], k2=f[1], k3=f[2],k4=f[3])
 
-if __name__== "__main__":
-  main()
+
+app.debug=True
+@app.route('/', methods=['POST'])
+def my_form_post():
+    f = functie()
+    return render_template("Tema1.html", k1=f[0], k2=f[1], k3=f[2], k4=f[3])
+
+if __name__ == '__main__':
+    app.run()
+

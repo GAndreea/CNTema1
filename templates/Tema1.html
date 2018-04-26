@@ -1,0 +1,50 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="static/tema1.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+<body>
+ <div class="jumbotron" style="text-align: center; padding-top: 30px; padding-bottom: 20px; background-color: #373C57; margin-bottom: 0px;">
+   <h1 style="color: #F2F2F0;">
+     Calcul Numeric
+   </h1>
+   <h2 style="color: #F2F2F0">
+     Tema 3
+   </h2>
+ </div>
+   <div class="row" style="background-color: #5584BD; margin: 0; padding-top: 20px; padding-bottom: 20px">
+     <p style="color: #F2F2F0; font-size: 20px; padding-left: 50px; ">
+       <a class="header-text">Schema de memorare economica a matricilor </a>
+     </p>
+   </div>
+   <div class="row" style="margin: 0; padding-top:30px; padding-bottom: 30px">
+     <div id="exercitiu1" style="padding-left: 50px; padding-right: 50px">
+          <p style="color: #000859; font-size:20px">
+         Un vector ‘rar’ este un vector cu ‘puține’ elemente nenule. Un asemenea
+        vector se memorează într-o structură care va reține doar valorile nenule și
+        poziția în vector a respectivei valori :
+        {(val!=0,i); xi = val}
+        O matrice rară poate fi memorată economic ca un vector de vectori
+        memorați rar – fiecare linie a matricei se memorează într-un vector rar,
+        elementul diagonal fiind ultimul element din vector
+              Dupa ce s-a salvat matricea in mod economic, comparand rezultatul nostru cu rezultatul din fisiere am obtiunut urmat
+              oarele rezultate ( Valoarea 0 = egalitate, -1 = inegalitate)
+
+      </p>
+      <p style="color: #5584BD; font-size: 20px">
+          COMPARA SUMA: {{ k1 }} </p>
+      <p style="color: #5584BD; font-size: 20px">
+          COMPARA INMULTIRE: {{ k2 }}</p>
+         <p style="color: #5584BD; font-size: 20px">
+             COMPARA VECTORUL B din a.txt: {{ k3 }}</p>
+         <p style="color: #5584BD; font-size: 20px">
+          COMPARA VECTORUL B din b.txt: {{ k4 }}
+      </p>
+     </div>
+
+   </div>
+</body>
+</html>
