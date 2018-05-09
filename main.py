@@ -1,6 +1,11 @@
 import functools
 import scipy.sparse
 import numpy as np
+from flask import Flask
+from flask import request
+from flask import render_template
+import random
+app = Flask(__name__)
 
 
 # x_stare_urmatoare(i) = (vectorulB(i) - suma(linia i din matrice * x_din stare_precendenta)(j)) / linia i din matrice(i)
@@ -186,7 +191,7 @@ def norma(matrix, xValues, vectorB):
     return max
 
 
-def main():
+def functie():
     f = open("m_rar_2018_4.txt", "r")
     n = int(f.readline())
     v = get_b("m_rar_2018_4.txt")
@@ -196,12 +201,15 @@ def main():
     xValues = [0] * (n)
     finished = False
     nrOfIteration = 0
+    results = []
     if (checkDiagonal(matrix, n) == True):
         while finished == False and nrOfIteration < 10000:
             prevIteration = xValues[:]
             newxValues = nextValues(matrix, vectorB, xValues, n)
             # asta trebuie afisata in html
             print("xvalues la iteratia ", nrOfIteration, " : ", xValues)
+            results.append(list(xValues))
+
             finished = checkFinalState(prevIteration, newxValues, precision)
             nrOfIteration = nrOfIteration + 1
             print("nrOfIteration", nrOfIteration)
@@ -215,7 +223,23 @@ def main():
     norma2 = norma(matrix, xValuesTransformed, bAsMatrix)
     # asta trebuie afisata in html
     print(norma2)
+    for l in results:
+        print('\n')
+        print(l)
+    return results, norma2
 
 
-if __name__ == "__main__":
-    main()
+@app.route('/')
+def my_form():
+   res, norma = functie()
+   return render_template("Tema1.html", res=res, norma=norma)
+
+
+app.debug=True
+@app.route('/', methods=['POST'])
+def my_form_post():
+    f = functie()
+    return render_template("Tema1.html", res=res, norma=norma)
+
+if __name__ == '__main__':
+    app.run()
