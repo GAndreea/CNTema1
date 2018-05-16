@@ -160,7 +160,7 @@ def nextValues(matrix, vectorB, xValues, n):
         divisor = 1
         for j in range(len(line)):
             if (line[j][1] != i):
-                bi = bi - line[j][0] * xValues[j]
+                bi = bi - line[j][0] * xValues[line[j][1]]
             if (line[j][1] == i):
                 divisor = line[j][0]
         bi = bi / divisor
