@@ -69,12 +69,18 @@ def calc(coeficienti, x):
         result += coeficienti[i] * x ** (n - i)
     return result
 
+def calcg1(coeficienti, x):
+    Fx = calc(coeficienti, x);
+    Fxh = calc(coeficienti, x-h);
+    Fx2h = calc(coeficienti, x-2*h);
+    return (3*Fx-4*Fxh+Fx2h)/2*h
+
 
 # deltaX = xk - xk+1
 def deltaX(xkm1, xk, coeficienti):
-    nextX = xk - ((xk - xkm1) * calc(coeficienti, xk)) / (calc(coeficienti, xk) - calc(coeficienti, xkm1))
+    nextX = xk - ((xk - xkm1) * calcg1(coeficienti, xk)) / (calcg1(coeficienti, xk) - calcg1(coeficienti, xkm1))
     delta = xk - nextX
-    numitor = calc(coeficienti, xk) - calc(coeficienti, xkm1)
+    numitor = calcg1(coeficienti, xk) - calcg1(coeficienti, xkm1)
     return delta, numitor, nextX
 
 
@@ -108,7 +114,14 @@ def main():
     # Declarare
     coeficienti = [1, 4, -3, -18];
     # print(horner(coeficienti,-3,3))
-    secantMethod(1, 2, coeficienti)
+    for i in range(10):
+        sir = get_Randoms(2)
+        try:
+            secantMethod(sir[0], sir[1], coeficienti)
+        except ZeroDivisionError:
+            print("ZerDiverr")
+        finally:
+            print("err")
     R = calculare_R(coeficienti)
     print("Interval: ", -R, R)
     for i in range(1000):
